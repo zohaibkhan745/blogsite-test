@@ -1,0 +1,35 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+<div style='max-width:600px'>
+  <h4>{% if post %}Edit Post{% else %}New Post{% endif %}</h4>
+  <hr>
+  <form method='POST'>
+    {% csrf_token %} # prevent fake form submission, Cross-site request forgery
+
+    <div class='mb-3'>
+      <label class='form-label'>Title</label>
+      <input type='text' name='title' value='{{ post.title }}'
+             class='form-control' placeholder='Post title' required>
+    </div>
+
+    <div class='mb-3'>
+      <label class='form-label'>Category</label>
+      <select name='category' class='form-select'>
+        <option value='tech'  {% if post.category == 'tech'  %}selected{% endif %}>Technology</option>
+        <option value='life'  {% if post.category == 'life'  %}selected{% endif %}>Lifestyle</option>
+        <option value='edu'   {% if post.category == 'edu'   %}selected{% endif %}>Education</option>
+        <option value='other' {% if post.category == 'other' %}selected{% endif %}>Other</option>
+      </select>
+    </div>
+
+    <div class='mb-3'>
+      <label class='form-label'>Content</label>
+      <textarea name='content' class='form-control'
+                rows='6'>{{ post.content }}</textarea>
+    </div>
+
+    <button type='submit' class='btn btn-success'>Save</button>
+    <a href='/' class='btn btn-secondary ms-2'>Cancel</a>
+  </form>
+</div>
+{% endblock %}

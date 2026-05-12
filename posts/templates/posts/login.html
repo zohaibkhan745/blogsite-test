@@ -1,0 +1,38 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+<div style="max-width:400px; margin:auto">
+  <h4 class="mb-3">Login</h4>
+  <hr>
+  <!-- Django's LoginView passes a 'form' object into this template automatically -->
+  <form method="POST">
+    {% csrf_token %}
+    <!-- Display any login errors (e.g., wrong password) -->
+    {% if form.errors %}
+      <div class="alert alert-danger">
+        Incorrect username or password. Please try again.
+      </div>
+    {% endif %}
+    <div class="mb-3">
+      <label class="form-label">Username</label>
+      <input type="text"
+             name="username"
+             class="form-control"
+             placeholder="Enter username"
+             required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input type="password"
+             name="password"
+             class="form-control"
+             placeholder="Enter password"
+             required>
+    </div>
+    <!-- 'next' carries the URL the user was trying to visit before being redirected to login -->
+    {% if next %}
+      <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
+    <button type="submit" class="btn btn-success w-100">Login</button>
+  </form>
+</div>
+{% endblock %}
