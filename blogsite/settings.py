@@ -40,8 +40,7 @@ if not GROQ_API_KEY:
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xgv1&+s9)lk^)6cj)%!bw=s8-z8)+mnacomkw=@^@43k^@7r=9'
-
+SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
